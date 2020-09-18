@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  supportedLanguage: ['hu', 'en'],
+  defaultLanguage: 'hu',
+  rootUrl: 'https://gergomarcellturi.github.io/speedrun',
 };

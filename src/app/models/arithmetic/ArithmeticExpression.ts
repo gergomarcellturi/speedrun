@@ -44,7 +44,7 @@ export class ArithmeticExpression {
     if (typeof this.value === 'number') {
       this.addValue(this.value);
       this.value = operator;
-    } else if (operator.getArithmeticLevel() > this.value.getArithmeticLevel()) {
+    } else if (operator.getArithmeticLevel() < this.value.getArithmeticLevel()) {
       this.addOperator(this.value);
       this.value = operator;
     } else {

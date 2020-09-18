@@ -11,8 +11,8 @@ export class CalculatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const test = new ArithmeticExpression().expressionOf('34 + 15 - 20 * 2');
-    test.inorder(test);
+    const test = new ArithmeticExpression().expressionOf('2 * 4 + 15 / 3 - 6');
+    // test.inorder(test);
     console.log(test.evaluate());
   }
 

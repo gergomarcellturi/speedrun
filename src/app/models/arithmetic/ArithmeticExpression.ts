@@ -9,15 +9,20 @@ export class ArithmeticExpression {
   public constructor() {}
 
   public evaluate = (): number => {
-
-    if (!this.value) {
-      return;
-    }
-
-    if ( typeof this.value === 'number') {
+    if (typeof this.value === 'number') {
       return this.value;
     }
-    return this.value.solve(this.left.evaluate(), this.right.evaluate());
+    return this.evaluateRec(this);
+  }
+
+  private evaluateRec = (node: ArithmeticExpression): number => {
+    if (!node || !node.value) {
+      return;
+    }
+    if ( typeof node.value === 'number') {
+      return node.value;
+    }
+    return node.value.solve(this.evaluateRec(node.left), this.evaluateRec(node.right));
   }
 
   public expressionOf = (expression: string): ArithmeticExpression => {
@@ -47,7 +52,7 @@ export class ArithmeticExpression {
     }
   }
 
-  public getPath = (): ArithmeticExpression => {
+  private getPath = (): ArithmeticExpression => {
 
     if (!this.left) {
       this.left = new ArithmeticExpression();
@@ -72,7 +77,11 @@ export class ArithmeticExpression {
     if (!node) {
       return;
     }
-    console.log(node.value);
+    if (typeof node.value === 'number') {
+      console.log(node.value);
+    } else {
+      console.log(node.value.getOperator);
+    }
     this.preorder(node.left);
     this.preorder(node.right);
   }
@@ -82,7 +91,11 @@ export class ArithmeticExpression {
       return;
     }
     this.inorder(node.left);
-    console.log(node.value);
+    if (typeof node.value === 'number') {
+      console.log(node.value);
+    } else {
+      console.log(node.value.getOperator);
+    }
     this.inorder(node.right);
   }
 

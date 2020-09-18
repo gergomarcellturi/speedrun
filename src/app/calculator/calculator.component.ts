@@ -12,7 +12,7 @@ export class CalculatorComponent implements OnInit {
 
   ngOnInit(): void {
     const test = new ArithmeticExpression().expressionOf('34 + 15 - 20 * 2');
-    // test.inorder(test);
+    test.inorder(test);
     console.log(test.evaluate());
   }
 

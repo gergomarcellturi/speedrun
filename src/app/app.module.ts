@@ -8,6 +8,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {environment} from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { SidebarComponent } from './calculator/sidebar/sidebar.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -17,10 +19,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: environment.defaultLanguage,

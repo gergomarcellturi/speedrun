@@ -1,1 +1,31 @@
-<p>{{'CALCULATOR_WORKS' | translate}}</p>
+<button (click)="toggleMenu()">
+  <span>toggle menu</span>
+</button>
+
+<div class="calculator-container">
+  <div class="calculator-body">
+    <div class="grid-container highlight">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+    </div>
+    <div class="grid-container number-layer">
+      <div class="grid-item"><span>1</span></div>
+      <div class="grid-item"><span>2</span></div>
+      <div class="grid-item"><span>3</span></div>
+      <div class="grid-item"><span>4</span></div>
+      <div class="grid-item"><span>5</span></div>
+      <div class="grid-item"><span>6</span></div>
+      <div class="grid-item"><span>7</span></div>
+      <div class="grid-item"><span>8</span></div>
+      <div class="grid-item"><span>9</span></div>
+    </div>
+  </div>
+</div>
+<app-sidebar [@slideInOut]="menuState"></app-sidebar>

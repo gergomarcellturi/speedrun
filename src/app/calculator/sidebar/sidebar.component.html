@@ -1,6 +1,6 @@
 <section class="card-list">
 
-  <div class="card-container" *ngFor="let history of calcHistory">
+  <div class="card-container" *ngFor="let history of calcHistory" (click)="clickEventHandler(history)">
     <div class="card">
       <header class="card-header">
         <h2>{{history.value}}</h2>

@@ -1,7 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as math from 'mathjs';
-import {CacheService} from "../services/cache.service";
+import {CacheService} from '../services/cache.service';
+import {EventService} from '../services/event.service';
 
 @Component({
   selector: 'app-calculator',
@@ -29,9 +30,11 @@ export class CalculatorComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private cacheService: CacheService,
+    private eventService: EventService,
   ) {  }
 
   ngOnInit(): void {
+    this.eventService.sidebarclick.subscribe(this.historyEventHandler.bind(this));
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#112';
     this.cursorEffect();
   }
@@ -74,10 +77,14 @@ export class CalculatorComponent implements OnInit {
     this.inputString = this.inputString.replace(this.getSearchExpression(), (operator) => {
       return ` ${operator} `;
     });
-    console.log(this.inputString);
   }
 
   private getSearchExpression(): RegExp {
     return /[+/*-]/gi;
+  }
+
+  private historyEventHandler(history: {expression: string, value: number}): void {
+    this.inputString = history.expression;
+    this.evaluateExpression();
   }
 }

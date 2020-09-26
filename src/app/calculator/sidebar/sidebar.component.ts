@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import * as math from 'mathjs';
 import {CacheService} from '../../services/cache.service';
+import {EventService} from '../../services/event.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +16,7 @@ export class SidebarComponent implements OnInit {
     private el: ElementRef,
     private renderer: Renderer2,
     private cacheService: CacheService,
+    private eventService: EventService,
     ) { }
 
   ngOnInit(): void {
@@ -23,10 +25,7 @@ export class SidebarComponent implements OnInit {
       ]);
   }
 
-  @HostListener('click', ['$event.target'])
-  onClick(target){
-    const  item = this.el.nativeElement.querySelector('li');
-
-    alert(item);
+  public clickEventHandler(history: {expression: string, value: number}) {
+    this.eventService.sidebarclick.emit(history);
   }
 }

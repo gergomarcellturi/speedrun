@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as math from 'mathjs';
+import {CacheService} from "../services/cache.service";
 
 @Component({
   selector: 'app-calculator',
@@ -25,7 +26,10 @@ export class CalculatorComponent implements OnInit {
   public inputString = '';
   public resultString = '';
 
-  constructor(private elementRef: ElementRef) {  }
+  constructor(
+    private elementRef: ElementRef,
+    private cacheService: CacheService,
+  ) {  }
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#112';
@@ -49,12 +53,12 @@ export class CalculatorComponent implements OnInit {
   }
 
   public input(char: string) {
-    console.log(this.inputString[this.inputString.length - 1]);
     this.inputString += this.isOperator(char) && this.isOperator(this.inputString[this.inputString.length - 1]) ? '' : char;
   }
 
   public evaluateExpression() {
     this.resultString = `= ${math.parse(this.inputString).evaluate()}`;
+    this.cacheService.addCalcHistory(math.parse(this.inputString));
   }
 
   public clearInput() {

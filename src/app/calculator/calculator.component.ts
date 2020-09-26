@@ -59,7 +59,7 @@ export class CalculatorComponent implements OnInit {
     this.inputString += this.isOperator(char) && this.isOperator(this.inputString[this.inputString.length - 1]) ? '' : char;
   }
 
-  private deleteChar(): void {
+  public deleteChar(): void {
     this.inputString = this.inputString.slice(0, -1);
     if ((this.isOperator(this.inputString[this.inputString.length - 1]) ||
        this.inputString[this.inputString.length - 1] === ' ') && this.inputString.length !== 0) {
@@ -82,7 +82,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   private corrigateInput() {
-    this.inputString = this.inputString.replace(/\s/g,'');
+    this.inputString = this.inputString.replace(/\s/g, '');
     this.inputString = this.inputString.replace(this.getSearchExpression(), (operator) => {
       return ` ${operator} `;
     });

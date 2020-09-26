@@ -4,10 +4,10 @@
 
 <div class="calculator-container">
   <div class="input-container">
-    <input [value]="inputString">
+    <input [value]="inputString" [readOnly]="true" (click)="deleteChar()">
   </div>
   <div class="input-container">
-    <input [value]="resultString" class="result-text">
+    <input [value]="resultString" [readOnly]="true" class="result-text">
   </div>
   <div class="calculator-body">
     <div class="grid-container highlight">

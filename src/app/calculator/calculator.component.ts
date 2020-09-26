@@ -21,7 +21,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class CalculatorComponent implements OnInit {
 
-  menuState = 'out';
+  public menuState = 'out';
+  public inputString = '';
 
   constructor(private elementRef: ElementRef) {  }
 
@@ -46,8 +47,19 @@ export class CalculatorComponent implements OnInit {
     });
   }
 
-
-  toggleMenu(){
+  public toggleMenu(){
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
+  }
+
+  public input(char: string) {
+    this.inputString += char;
+  }
+
+  public evaluateExpression() {
+    console.log(this.inputString);
+  }
+
+  public clearInput() {
+    this.inputString = '';
   }
 }

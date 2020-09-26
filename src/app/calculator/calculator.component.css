@@ -68,10 +68,11 @@ input{
 .number-layer .grid-item:hover {
   border: 2px solid #cd7bff;
 }
-.number-layer .grid-item span:last-child{
+.number-layer .grid-item span:last-child {
   font-size: 32px;
 }
 
-.hidden {
-  visibility: hidden;
+.grid-item:hover {
+  background-color: #58586a;
+  cursor: pointer;
 }

@@ -10,6 +10,7 @@ import {environment} from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './calculator/sidebar/sidebar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -26,6 +27,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatIconModule,
     TranslateModule.forRoot({
       defaultLanguage: environment.defaultLanguage,
       loader: {

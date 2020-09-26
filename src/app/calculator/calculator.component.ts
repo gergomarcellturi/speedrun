@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {ArithmeticExpression} from '../models/arithmetic/ArithmeticExpression';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-calculator',
@@ -23,16 +23,13 @@ export class CalculatorComponent implements OnInit {
 
   public menuState = 'out';
   public inputString = '';
+  public resultString = '';
 
   constructor(private elementRef: ElementRef) {  }
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#112';
     this.cursorEffect();
-
-    const test = new ArithmeticExpression().expressionOf('2 * 4 + 15 / 3 - 6');
-    // test.inorder(test);
-    console.log(test.evaluate());
   }
 
   private cursorEffect() {
@@ -52,14 +49,19 @@ export class CalculatorComponent implements OnInit {
   }
 
   public input(char: string) {
-    this.inputString += char;
+    console.log(this.inputString[this.inputString.length - 1]);
+    this.inputString += this.isOperator(char) && this.isOperator(this.inputString[this.inputString.length - 1]) ? '' : char;
   }
 
   public evaluateExpression() {
-    console.log(this.inputString);
+    this.resultString = `= ${math.parse(this.inputString).evaluate()}`;
   }
 
   public clearInput() {
     this.inputString = '';
+  }
+
+  private isOperator(char: string): boolean {
+    return char === '/' || char === '*' || char === '+' || char === '-' || char === undefined;
   }
 }

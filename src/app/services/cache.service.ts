@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import * as math from 'mathjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
-  private calcHistorySubject: BehaviorSubject<math.MathNode[]>;
-  private calcHistory: Observable<math.MathNode[]>;
+  private calcHistorySubject: BehaviorSubject<string[]>;
+  private calcHistory: Observable<string[]>;
 
   constructor() {
-    this.calcHistorySubject = new BehaviorSubject<math.MathNode[]>(JSON.parse(localStorage.getItem('calcHistory')));
+    this.calcHistorySubject = new BehaviorSubject<string[]>(JSON.parse(localStorage.getItem('calcHistory')) || []);
     this.calcHistory = this.calcHistorySubject.asObservable();
   }
 
-  public get getCalcHistory(): math.MathNode[] {
+  public get getCalcHistory(): string[] {
     return this.calcHistorySubject.value;
   }
 
-  public addCalcHistory(calcHistory: math.MathNode): void {
+  public addCalcHistory(calcHistory: string): void {
     const calcHistoryArray = [ ...this.getCalcHistory, calcHistory];
     localStorage.setItem('calcHistory', JSON.stringify(calcHistoryArray));
     this.calcHistorySubject.next(JSON.parse(localStorage.getItem('calcHistory')));

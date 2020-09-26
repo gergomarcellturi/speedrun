@@ -1,34 +1,12 @@
 <section class="card-list">
 
-  <div class="card-container">
+  <div class="card-container" *ngFor="let history of calcHistory">
     <div class="card">
       <header class="card-header">
-        <h2>test1</h2>
-     </header>
-     <div class="card-body">
-       asd
-     </div>
-    </div>
-  </div>
-
-  <div class="card-container">
-    <div class="card">
-      <header class="card-header">
-       <h2>test2</h2>
+        <h2>{{history.value}}</h2>
       </header>
       <div class="card-body">
-        asd
-      </div>
-    </div>
-  </div>
-
-  <div class="card-container">
-    <div class="card">
-      <header class="card-header">
-        <h2>test3</h2>
-      </header>
-      <div class="card-body">
-        asd
+        {{history.expression}}
       </div>
     </div>
   </div>

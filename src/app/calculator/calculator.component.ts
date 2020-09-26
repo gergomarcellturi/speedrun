@@ -57,8 +57,9 @@ export class CalculatorComponent implements OnInit {
   }
 
   public evaluateExpression() {
+    this.corrigateInput();
     this.resultString = `= ${math.parse(this.inputString).evaluate()}`;
-    this.cacheService.addCalcHistory(math.parse(this.inputString));
+    this.cacheService.addCalcHistory(this.inputString);
   }
 
   public clearInput() {
@@ -67,5 +68,16 @@ export class CalculatorComponent implements OnInit {
 
   private isOperator(char: string): boolean {
     return char === '/' || char === '*' || char === '+' || char === '-' || char === undefined;
+  }
+
+  private corrigateInput() {
+    this.inputString = this.inputString.replace(this.getSearchExpression(), (operator) => {
+      return ` ${operator} `;
+    });
+    console.log(this.inputString);
+  }
+
+  private getSearchExpression(): RegExp {
+    return /[+/*-]/gi;
   }
 }

@@ -42,6 +42,7 @@ input{
 
 .grid-item{
   margin: 2px;
+  transition: .8s;
 }
 
 .highlight {
@@ -69,15 +70,16 @@ input{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 }
 .number-layer .grid-item:hover {
   border: 2px solid #cd7bff;
 }
+
 .number-layer .grid-item span:last-child {
   font-size: 32px;
 }
 
 .grid-item:hover {
   background-color: #58586a;
-  cursor: pointer;
 }

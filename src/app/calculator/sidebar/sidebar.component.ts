@@ -1,5 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import * as math from 'mathjs';
+import {Component, OnInit, ElementRef, Renderer2, Input} from '@angular/core';
 import {CacheService} from '../../services/cache.service';
 import {EventService} from '../../services/event.service';
 
@@ -10,7 +9,8 @@ import {EventService} from '../../services/event.service';
 })
 export class SidebarComponent implements OnInit {
 
-  public calcHistory: {expression: string, value: number}[] = [];
+  @Input()
+  public calcHistory: {expression: string, value: number}[];
 
   constructor(
     private el: ElementRef,
@@ -20,9 +20,6 @@ export class SidebarComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.cacheService.getCalcHistory.forEach(value => this.calcHistory = [
-      ...this.calcHistory, {expression: value, value: math.parse(value).evaluate()}
-      ]);
   }
 
   public clickEventHandler(history: {expression: string, value: number}) {

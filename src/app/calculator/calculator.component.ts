@@ -26,6 +26,7 @@ export class CalculatorComponent implements OnInit {
   public menuState = 'out';
   public inputString = '';
   public resultString = '';
+  public calcHistory: {expression: string, value: number}[] = [];
 
   constructor(
     private elementRef: ElementRef,
@@ -37,6 +38,7 @@ export class CalculatorComponent implements OnInit {
     this.eventService.sidebarclick.subscribe(this.historyEventHandler.bind(this));
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#112';
     this.cursorEffect();
+    this.getHistoryFromCache();
   }
 
   private cursorEffect() {
@@ -71,10 +73,21 @@ export class CalculatorComponent implements OnInit {
     this.corrigateInput();
     this.resultString = `= ${math.parse(this.inputString).evaluate()}`;
     this.cacheService.addCalcHistory(this.inputString);
+    this.addToCalcHistory(this.inputString);
   }
 
   public clearInput() {
     this.inputString = '';
+  }
+
+  private addToCalcHistory(resultString: string): void {
+    this.calcHistory = [ {expression: resultString, value: math.parse(resultString).evaluate()}, ...this.calcHistory];
+  }
+
+  private getHistoryFromCache(): void {
+    this.cacheService.getCalcHistory.forEach(value => this.calcHistory = [
+      ...this.calcHistory, {expression: value, value: math.parse(value).evaluate()}
+    ]);
   }
 
   private isOperator(char: string): boolean {

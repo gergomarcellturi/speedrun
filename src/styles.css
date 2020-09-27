@@ -42,6 +42,7 @@
 .card-container {
   padding-right: 6000px;
   transition: .4s;
+  user-select: none;
 }
 
 .card-container:hover {
